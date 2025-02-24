@@ -5,6 +5,7 @@ import com.example.GreetingAppDevelopment.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,5 +41,9 @@ public class GreetingService {
     public Message getMessageById(Long id){
         Optional<Message> message=messageRepository.findById(id);
         return message.orElse(null);
+    }
+
+    public List<Message> getAllMessage(){
+        return messageRepository.findAll();
     }
 }
