@@ -1,18 +1,37 @@
 package com.example.GreetingAppDevelopment.service;
 
+import com.example.GreetingAppDevelopment.model.Message;
+import com.example.GreetingAppDevelopment.repository.MessageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GreetingService {
-    public String getGreetingMessage(String firstName,String lastName) {
-            if(firstName!=null && lastName!=null){
-                return "Hello " + firstName +" "+ lastName +" !";
-            } else if (firstName!=null) {
-                return "Hello " + firstName +" !";
-            }else if(lastName !=null){
-                return "Hello " + lastName +" !";
-            }else {
-                return "Hello world";
-            }
+
+    private final MessageRepository messageRepository;
+
+    @Autowired
+    public GreetingService(MessageRepository messageRepository) {
+        this.messageRepository = messageRepository;
+    }
+
+    public Message saveGreeting(Message message) {
+        return messageRepository.save(message);
+    }
+
+    public String getGreetingMessage(String firstName, String lastName) {
+        String message;
+        if (firstName != null && lastName != null) {
+            message = "Hello " + firstName + " " + lastName + "!";
+        } else if (firstName != null) {
+            message = "Hello " + firstName + "!";
+        } else if (lastName != null) {
+            message = "Hello " + lastName + "!";
+        } else {
+            message = "Hello, world!";
+        }
+        Message message1 = new Message(message);
+        saveGreeting(message1);
+        return message;
     }
 }
