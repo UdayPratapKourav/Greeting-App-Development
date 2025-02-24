@@ -1,6 +1,8 @@
 package com.example.GreetingAppDevelopment.controller;
 
 import com.example.GreetingAppDevelopment.model.Greeting;
+import com.example.GreetingAppDevelopment.service.GreetingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/greeting")
 public class GreetingController {
+
+    private final GreetingService greetingService;
+    @Autowired
+    public GreetingController(GreetingService greetingService){
+        this.greetingService=greetingService;
+    }
+    @GetMapping("/message")
+    public Greeting getGreetingMessage(){
+        return new Greeting(greetingService.getGreetingMessage());
+    }
+
     @GetMapping
     public Greeting getGreeting() {
         return new Greeting("Hello, this is a GET request!");
