@@ -44,6 +44,10 @@ public class GreetingController {
     public Message updateMessage(@PathVariable Long id, @RequestBody Message message){
         return greetingService.updateMessage(id,message);
     }
+    @DeleteMapping("/delete/{id}")
+    public String deleteMessage(@PathVariable Long id){
+        return greetingService.deleteMessage(id);
+    }
     @GetMapping
     public Greeting getGreeting() {
         return new Greeting("Hello, this is a GET request!");
