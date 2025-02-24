@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/greeting")
 public class GreetingController {
@@ -33,6 +35,10 @@ public class GreetingController {
     @GetMapping("/{id}")
     public Message getMessage(@PathVariable Long id){
         return greetingService.getMessageById(id);
+    }
+    @GetMapping("/all")
+    public List<Message> getAllMessage(){
+        return greetingService.getAllMessage();
     }
     @GetMapping
     public Greeting getGreeting() {
