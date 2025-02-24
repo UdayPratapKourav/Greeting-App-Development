@@ -56,4 +56,13 @@ public class GreetingService {
             return null;
         }
     }
+    public String deleteMessage(Long id ){
+        Optional<Message>message=messageRepository.findById(id);
+        if(message.isPresent()){
+            messageRepository.deleteById(id);
+            return "Greeting with id :"+id+" deleted successfully";
+        }else{
+            return "Greeting not found ";
+        }
+    }
 }
