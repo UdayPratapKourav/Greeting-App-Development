@@ -40,6 +40,10 @@ public class GreetingController {
     public List<Message> getAllMessage(){
         return greetingService.getAllMessage();
     }
+    @PutMapping("/update/{id}")
+    public Message updateMessage(@PathVariable Long id, @RequestBody Message message){
+        return greetingService.updateMessage(id,message);
+    }
     @GetMapping
     public Greeting getGreeting() {
         return new Greeting("Hello, this is a GET request!");
