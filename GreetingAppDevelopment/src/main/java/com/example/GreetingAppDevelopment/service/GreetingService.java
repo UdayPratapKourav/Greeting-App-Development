@@ -46,4 +46,14 @@ public class GreetingService {
     public List<Message> getAllMessage(){
         return messageRepository.findAll();
     }
+    public Message updateMessage(Long id , Message message){
+        Optional<Message>existingMessage=messageRepository.findById(id);
+        if(existingMessage.isPresent()){
+            Message message1=existingMessage.get();
+            message1.setMessage(message.getMessage());
+            return messageRepository.save(message1);
+        }else{
+            return null;
+        }
+    }
 }
