@@ -30,6 +30,10 @@ public class GreetingController {
     public Message saveGreeting(@RequestBody Message message) {
         return greetingService.saveGreeting(message);
     }
+    @GetMapping("/{id}")
+    public Message getMessage(@PathVariable Long id){
+        return greetingService.getMessageById(id);
+    }
     @GetMapping
     public Greeting getGreeting() {
         return new Greeting("Hello, this is a GET request!");
